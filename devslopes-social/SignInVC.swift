@@ -60,6 +60,12 @@ class SignInVC: UIViewController {
         })
     }
     
+    // Disapear keyboard if user touches any area in the app
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func signInTapped(_ sender: Any) {
         if let email = emailField.text, let password = passwordField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (iser, error) in
