@@ -10,7 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
-
+import SwiftKeychainWrapper
 
 class SignInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var emailField: FancyField!
@@ -20,9 +20,10 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         
+        
+        
         emailField.delegate = self
         passwordField.delegate = self
-        
         
     }
     
