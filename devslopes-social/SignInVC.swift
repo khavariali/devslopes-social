@@ -12,13 +12,18 @@ import FBSDKLoginKit
 import Firebase
 
 
-class SignInVC: UIViewController {
+class SignInVC: UIViewController, UITextFieldDelegate {
     @IBOutlet var emailField: FancyField!
     @IBOutlet var passwordField: FancyField!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +70,15 @@ class SignInVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    
+    //Dismiss keyboard when you puch return or user push return in they keyboard
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     
     @IBAction func signInTapped(_ sender: Any) {
         if let email = emailField.text, let password = passwordField.text {
