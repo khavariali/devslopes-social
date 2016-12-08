@@ -20,11 +20,17 @@ class SignInVC: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         
-        
-        
         emailField.delegate = self
         passwordField.delegate = self
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("***REZA***id found in the keychain")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +67,9 @@ class SignInVC: UIViewController, UITextFieldDelegate {
             } else {
                 
                 print("****Reza**** Successfully authenticate with firebase")
-                
+                if let user = user {
+                    self.completeSignIn(id: user.uid)
+                }
             }
         })
     }
@@ -83,9 +91,12 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func signInTapped(_ sender: Any) {
         if let email = emailField.text, let password = passwordField.text {
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (iser, error) in
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
                 if error == nil {
                     print("***Reza*** email/password User authenticated with firebase")
+                    if let user = user {
+                        self.completeSignIn(id: user.uid)
+                    }
                 } else {
                     FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
                         if error != nil {
@@ -93,11 +104,20 @@ class SignInVC: UIViewController, UITextFieldDelegate {
                             // check for other senarios password lenght and other things... alert
                         } else {
                             print("***REZA*** Successfully authenticated with email/password firebase")
+                            if let user = user {
+                                self.completeSignIn(id: user.uid)
+                            }
                         }
                     })
                 }
             })
         }
+    }
+    func completeSignIn(id: String) {
+        
+        let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("***REZA*** Data saved in the Keychain \(keychainResult)")
+        performSegue(withIdentifier: "goToFeed", sender: nil)
     }
 }
 
