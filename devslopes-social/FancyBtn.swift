@@ -23,9 +23,9 @@ class FancyBtn: UIButton {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layer.cornerRadius = self.frame.width / 2
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        layer.cornerRadius = self.frame.width / 2
+//    }
 }
