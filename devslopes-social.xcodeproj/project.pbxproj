@@ -21,6 +21,7 @@
 		9FAEE3B41DF702F7002B8F38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FAEE3B31DF702F7002B8F38 /* Assets.xcassets */; };
 		9FAEE3B71DF702F7002B8F38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FAEE3B51DF702F7002B8F38 /* LaunchScreen.storyboard */; };
 		9FAEE3BF1DF703E5002B8F38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAEE3BE1DF703E5002B8F38 /* GoogleService-Info.plist */; };
+		9FF507CB1E02586200C0AC01 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF507CA1E02586200C0AC01 /* DataService.swift */; };
 		B0178C45DB5005E4F9FFC8C8 /* Pods_devslopes_social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA70E6D6F7E9979A1CED7B8 /* Pods_devslopes_social.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		9FAEE3B61DF702F7002B8F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9FAEE3B81DF702F7002B8F38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FAEE3BE1DF703E5002B8F38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FF507CA1E02586200C0AC01 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		B02495029606D18ABE029927 /* Pods-devslopes-social.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-devslopes-social.debug.xcconfig"; path = "Pods/Target Support Files/Pods-devslopes-social/Pods-devslopes-social.debug.xcconfig"; sourceTree = "<group>"; };
 		EFA70E6D6F7E9979A1CED7B8 /* Pods_devslopes_social.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_devslopes_social.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 		9FAEE3AB1DF702F7002B8F38 /* devslopes-social */ = {
 			isa = PBXGroup;
 			children = (
+				9FF507C91E02584300C0AC01 /* Services */,
 				9F904F2D1DF7DFA2008AA35E /* Util */,
 				9F904F2A1DF710A4008AA35E /* Model */,
 				9F904F291DF7109E008AA35E /* View */,
@@ -136,6 +139,14 @@
 				9FAEE3BE1DF703E5002B8F38 /* GoogleService-Info.plist */,
 			);
 			path = "devslopes-social";
+			sourceTree = "<group>";
+		};
+		9FF507C91E02584300C0AC01 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9FF507CA1E02586200C0AC01 /* DataService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 		A1145C279ADF77D5251436CB /* Pods */ = {
@@ -177,7 +188,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "IT Emergency Malaysia";
 				TargetAttributes = {
 					9FAEE3A81DF702F7002B8F38 = {
@@ -277,6 +288,7 @@
 				9FAEE3AF1DF702F7002B8F38 /* SignInVC.swift in Sources */,
 				9F904F311DF7EB4D008AA35E /* RoundBtn.swift in Sources */,
 				9FAEE3AD1DF702F7002B8F38 /* AppDelegate.swift in Sources */,
+				9FF507CB1E02586200C0AC01 /* DataService.swift in Sources */,
 				9F95DDA51DF9B5DF00265FD8 /* FeedVC.swift in Sources */,
 				9F904F2C1DF7DEFA008AA35E /* FancyView.swift in Sources */,
 				9F904F2F1DF7DFB7008AA35E /* Constants.swift in Sources */,
