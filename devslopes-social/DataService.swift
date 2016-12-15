@@ -16,7 +16,7 @@ class DataService {
     static let ds = DataService()
     
     private var _REF_BASE = DB_BASE
-    private var _REF_POSTS = DB_BASE.child("posts")
+    private var _REF_POSTS = DB_BASE.child("post")
     private var _REF_USERS = DB_BASE.child("users")
     
     var REF_BASE: FIRDatabaseReference {
@@ -34,5 +34,6 @@ class DataService {
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, String>) {
         REF_USERS.child(uid).updateChildValues(userData)
     }
+    
     
 }

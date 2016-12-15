@@ -18,6 +18,14 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        DataService.ds.REF_POSTS.observe(.value) { (snapshot) in
+            print(snapshot.value!)
+        }
+        
+//        DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
+//            print("this is a test : \(snapshot.value!)")
+//        })
     }
     
     
