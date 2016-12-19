@@ -82,7 +82,7 @@ class SignInVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    //Dismiss keyboard when you puch return or user push return in they keyboard
+    //Dismiss keyboard when you tuch or user push return in they keyboard
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

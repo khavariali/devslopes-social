@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var imageAdd: CircleView!
@@ -26,6 +26,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        captionField.delegate = self
         
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
@@ -125,11 +126,31 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
                 } else {
                     print("***REZA*** successfuly uploaded image to firebase storage")
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
-                    self.imageSelected = false
+                    
+                    if let url = downloadUrl {
+                        self.postToFirebase(imgUrl: url)
+                    }
                 }
             }
             
         }
+    }
+    
+    func postToFirebase (imgUrl: String) {
+        
+        let post : Dictionary<String, Any> = [
+            "caption": captionField.text!,
+            "imageUrl": imgUrl,
+            "likes": 0
+        ]
+        
+        let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
+        firebasePost.setValue(post)
+        
+        imageSelected = false
+        captionField.text = ""
+        imageAdd.image = UIImage(named: "add-image")
+        tableView.reloadData()
     }
     
     @IBAction func signOutTapped(_ sender: Any) {
@@ -142,5 +163,20 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         
     }
+    
+    // Disapear keyboard if user touches any area in the app
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    //Dismiss keyboard when you tuch or user push return in they keyboard
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        captionField.resignFirstResponder()
+        return true
+    }
+
     
 }
