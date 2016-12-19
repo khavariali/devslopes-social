@@ -14,10 +14,13 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var imageAdd: CircleView!
+    @IBOutlet var captionField: FancyField!
     
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
+    
+    var imageSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +82,7 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage{
             imageAdd.image = image
+            imageSelected = true
         } else {
             print("***REZA*** A valid image wasn't selected")
         }
@@ -90,6 +94,42 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         
         present(imagePicker, animated: true, completion: nil)
         
+    }
+    
+    @IBAction func postBtnTapped(_ sender: Any) {
+        
+        guard let caption = captionField.text, caption != "" else {
+            
+            print("***REZA*** caption must be entered")
+            return
+        }
+        
+        guard let img = imageAdd.image, imageSelected == true else {
+            print("***REZA*** Image must be selected")
+            return
+        }
+        
+        if let imageData = UIImageJPEGRepresentation(img, 0.2) {
+            
+            // pass to firebase storage
+            
+            let imgUid = NSUUID().uuidString
+            
+            let metaData = FIRStorageMetadata()
+            metaData.contentType = "image/jpg"
+            
+            DataService.ds.REF_POST_IMAGES.child(imgUid).put(imageData, metadata: metaData) {
+                (metaData, error) in
+                if error != nil {
+                    print("***REZA*** unable to upload image to firebase storage")
+                } else {
+                    print("***REZA*** successfuly uploaded image to firebase storage")
+                    let downloadUrl = metaData?.downloadURL()?.absoluteString
+                    self.imageSelected = false
+                }
+            }
+            
+        }
     }
     
     @IBAction func signOutTapped(_ sender: Any) {

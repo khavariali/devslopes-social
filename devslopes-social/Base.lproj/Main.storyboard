@@ -211,6 +211,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" image="add-post"/>
+                                                <connections>
+                                                    <action selector="postBtnTapped:" destination="Asj-Ba-aX1" eventType="touchUpInside" id="04I-AY-asi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -344,6 +347,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="captionField" destination="fzW-RV-EJL" id="y2V-ne-L0u"/>
                         <outlet property="imageAdd" destination="yiH-9G-gaT" id="JM4-Qu-uep"/>
                         <outlet property="tableView" destination="ATf-oy-hZs" id="Dgx-S4-zyj"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goToSignIn" id="eb0-Og-cNs"/>
